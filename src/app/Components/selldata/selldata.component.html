@@ -1,0 +1,54 @@
+<div class="col-6 mt-2">
+    <label> <b>from-Date:</b></label>
+    <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" placeholder="Enter from-Date" />
+</div>
+<div class="col-6 mt-2">
+    <label> <b>To-Date:</b></label>
+    <input type="date" class="form-control" id="endDate" [(ngModel)]="endDate" placeholder="Enter To-Date"
+        [max]="maxDate" />
+</div>
+<div class="mt-2">
+    <button type="submit" class="btn btn-primary mb-1 btn-lg" (click)="filterAndGroupSales()">
+        Calculate
+    </button>
+</div>
+
+
+ <div *ngIf="filteredSales">
+    <h3>Total Sales per City and Month</h3>
+    <ul>
+        <li *ngFor="let city of filteredSales|keyvalue">
+            <strong>{{ city.key}}</strong>
+            <ul>
+                <li *ngFor="let month of city.value | keyvalue">
+                    {{ month.key }}: {{ month.value}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <div class="container-fluid">
+        <h2>Sell Data</h2>
+        <table class="table table-success table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">City</th>
+              <th scope="col">Sell</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of Selldata; let id = index">
+              <td>{{ id + 1 }}</td>
+              <td>{{ s.city }}</td>
+              <td>{{ s.amount }}</td>
+              <td>{{ s.selldate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      
+     
